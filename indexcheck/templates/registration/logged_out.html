@@ -1,0 +1,7 @@
+{% extends 'registration/auth_base.html' %}
+
+{% block content %}
+<h6 class="card-title">Logged out</h6>
+<p>ログアウトしました。</p>
+<p><a href="{% url 'login' %}">再ログインする</a></p>
+{% endblock %}

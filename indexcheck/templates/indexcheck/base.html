@@ -1,0 +1,137 @@
+{% load static %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Indexcheck</title>
+  <link rel="stylesheet" href="{% static 'indexcheck/css/bootstrap.min.css' %}">
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="{% static 'indexcheck/vendors/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'indexcheck/vendors/css/vendor.bundle.base.css' %}">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'indexcheck/vendors/flag-icon-css/css/flag-icon.min.css' %}">
+  <link rel="stylesheet" href="{% static 'indexcheck/vendors/jvectormap/jquery-jvectormap.css' %}">
+  <!-- End plugin css for this page -->
+  <!-- Layout styles -->
+  <link rel="stylesheet" href="{% static 'indexcheck/css/demo/style.css' %}">
+  <!-- End layout styles -->
+  <link rel="shortcut icon" href="{% static 'indexcheck/images/favicon.png' %}" />
+</head>
+<body>
+<script src="{% static 'indexcheck/js/preloader.js'%}"></script>
+{% if user.is_authenticated %}
+  <div class="body-wrapper">
+    <aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open">
+      <div class="mdc-drawer__header">
+        <a class="mdc-drawer__header-name" href="{% url 'indexcheck:index_list' %}">Indexcheck</a>
+      </div>
+      <div class="mdc-drawer__content ps">
+        <div class="user-info">
+          <p class="name">{{ user.username }}</p>
+          <p class="email">xxxxx@example</p>
+        </div>
+        <div class="mdc-list-group">
+          <nav class="mdc-list mdc-drawer-menu">
+            <div class="mdc-list-item mdc-drawer-item" tabindex="-1">
+              <a class="mdc-drawer-link active" href="{% url 'indexcheck:index_list' %}" tabindex="-1">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">home</i>
+                  List
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item" tabindex="-1">
+              <a class="mdc-drawer-link active" href="{% url 'indexcheck:index_create' %}" tabindex="-1">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">track_changes</i>
+                  Create
+              </a>
+            </div>
+          </nav> 
+        </div>
+        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+          <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps__rail-y" style="top: 0px; right: 0px;">
+          <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+        </div>
+      </div>
+    </aside>
+    <div class="main-wrapper mdc-drawer-app-content">
+      <header class="mdc-top-app-bar">
+        <div class="mdc-top-app-bar__row">
+          <div class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button sidebar-toggler">menu</button>
+            <span class="mdc-top-app-bar__title">Indexcheck</span>
+          </div>
+          <div class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end mdc-top-app-bar__section-right">
+            <div class="menu-button-container menu-profile d-none d-md-block">
+              <button class="mdc-button mdc-menu-button">
+                <span class="d-flex align-items-center">
+                  <span class="user-name">{{ user.username }}</span>
+                </span>
+              </button>
+              <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
+                  <li class="mdc-list-item" role="menuitem">
+                    <div class="item-thumbnail item-thumbnail-icon-only">
+                      <i class="mdi mdi-account-edit-outline text-primary"></i>
+                    </div>
+                    <div class="item-content d-flex align-items-start flex-column justify-content-center">
+                      <h6 class="item-subject font-weight-normal">Edit profile</h6>
+                    </div>
+                  </li>
+                  <li class="mdc-list-item" role="menuitem">
+                    <div class="item-thumbnail item-thumbnail-icon-only">
+                      <i class="mdi mdi-settings-outline text-primary"></i>                      
+                    </div>
+                    <!--<div class="item-content d-flex align-items-start flex-column justify-content-center">
+                      <h6 class="item-subject font-weight-normal"> Log out</h6>
+                    </div>-->
+                    <a class="item-subject font-weight-normal" href="{% url 'logout' %}"> Log out</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="page-wrapper mdc-toolbar-fixed-adjust">
+        <main class="content-wrapper">
+          <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+              {% block content %}{% endblock %}
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <p>ログインしていません</p>
+  <p><a href="{% url 'login' %}">ログインする</a></p>
+  {% endif %}
+  <!--<script src="{% static 'indexcheck/js/jquery-3.5.0.min.js' %}"></script>-->
+  <script src="{% static 'indexcheck/js/bootstrap.bundle.min.js' %}"></script>
+  <!-- plugins:js -->
+  <script src="{% static 'indexcheck/vendors/js/vendor.bundle.base.js' %}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="{% static 'indexcheck/vendors/chartjs/Chart.min.js' %}"></script>
+  <script src="{% static 'indexcheck/vendors/jvectormap/jquery-jvectormap.min.js' %}"></script>
+  <script src="{% static 'indexcheck/vendors/jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{% static 'indexcheck/js/material.js' %}"></script>
+  <script src="{% static 'indexcheck/js/misc.js' %}"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{% static 'indexcheck/js/dashboard.js' %}"></script>
+  <!-- End custom js for this page-->
+</body>
+</html>
+
+

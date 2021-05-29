@@ -1,0 +1,12 @@
+{% extends 'registration/auth_base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<h6 class="card-title">Login</h6>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><a href="{% url 'password_reset' %}">パスワードを忘れた</a></p>
+    <button type="submit" class="btn btn-primary">ログイン</button>
+</form>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'indexcheck/base.html' %}
+
+{% block content %}
+  <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+      <p>{{ index.theme_name }}を削除します。よろしいですか。</p>
+      <form action="" method="POST">
+          {% csrf_token %}
+          <button class="mdc-button mdc-button--unelevated filled-button--secondary" type="submit">削除</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

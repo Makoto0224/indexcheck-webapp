@@ -1,0 +1,26 @@
+{% extends 'indexcheck/base.html' %}
+
+{% block content %}
+  <h2>Index List</h2>
+  {% for index in index_list %}
+    <div class="card-inner">
+      <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet">
+        <div class="mdc-card info-card info-card--success">
+          <div class="card-inner">
+            <h3 class="card-title">{{ index.theme_name }}</h3>
+            <h5 class="font-weight-light pb-2 mb-1 border-bottom">{{ index.code }}</h5>
+            <a class="mdc-button mdc-button--unelevated" href="{% url 'indexcheck:index_detail' index.pk %}">
+              グラフ
+            </a>
+            <a class="mdc-button mdc-button--unelevated filled-button--info" href="{% url 'indexcheck:index_update' index.pk %}">
+              編集
+            </a>
+            <a class="mdc-button mdc-button--unelevated filled-button--secondary" href="{% url 'indexcheck:index_delete' index.pk %}">
+              削除
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}

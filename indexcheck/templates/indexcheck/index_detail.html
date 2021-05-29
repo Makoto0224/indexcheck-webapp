@@ -1,0 +1,27 @@
+{% extends 'indexcheck/base.html' %}
+
+{% block content %}
+  <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+      <div class="d-flex justify-content-between">
+        <h4 class="card-title mb-0">{{ index.theme_name }}</h4>
+      </div>
+      <div class="d-block d-sm-flex justify-content-between align-items-center">
+        <h5 class="card-sub-title mb-2 mb-sm-0">{{ index.code }}</h5>
+      </div>
+      <div class="mdc-layout-grid__inner mt-2">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet">
+          <img src="{% url 'indexcheck:index_plot' index.pk %}" width=600 height=600>
+        </div>
+      </div>
+      <div class="d-block d-sm-flex">
+        <a class="mdc-button mdc-button--unelevated filled-button--info" href="{% url 'indexcheck:index_update' index.pk %}">
+          編集
+        </a>
+        <a class="mdc-button mdc-button--unelevated filled-button--secondary" href="{% url 'indexcheck:index_delete' index.pk %}">
+          削除
+        </a>
+      </div>
+    </div>
+   </div>
+{% endblock %}
